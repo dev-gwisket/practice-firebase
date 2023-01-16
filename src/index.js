@@ -6,7 +6,9 @@ import {
   addDoc,
   deleteDoc,
   doc,
-  onSnapshot
+  onSnapshot,
+  query,
+  where
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -22,6 +24,7 @@ initializeApp(firebaseConfig);
 
 const db = getFirestore();
 const colRef = collection(db, 'books');
+const q = query(colRef, where('author', '==', 'Dennis Ritchie'))
 
 getDocs(colRef)
   .then(snapshot => {
@@ -39,7 +42,7 @@ getDocs(colRef)
     console.log(err.message);
   })
 
-onSnapshot(colRef, snapshot => {
+onSnapshot(q, snapshot => {
   let books = [];
 
   snapshot.docs.forEach(doc => {
