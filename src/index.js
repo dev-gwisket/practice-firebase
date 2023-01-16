@@ -3,7 +3,9 @@ import {
   getFirestore,
   collection,
   getDocs,
-  addDoc
+  addDoc,
+  deleteDoc,
+  doc
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -46,5 +48,17 @@ addBookForm.addEventListener('submit', e => {
   }).then(_ => {
     addBookForm.reset();
   });
+});
+
+const deleteBookForm = document.querySelector('.delete')
+deleteBookForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const docRef = doc(db, 'books', deleteBookForm.id.value)
+
+  deleteDoc(docRef)
+    .then(_ => {
+      deleteBookForm.reset();
+    })
 });
 
