@@ -8,7 +8,8 @@ import {
   doc,
   onSnapshot,
   query,
-  where
+  where,
+  orderBy
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -24,7 +25,12 @@ initializeApp(firebaseConfig);
 
 const db = getFirestore();
 const colRef = collection(db, 'books');
-const q = query(colRef, where('author', '==', 'Dennis Ritchie'))
+const q =
+  query(
+    colRef,
+    where('author', '==', 'Dennis Ritchie'),
+    orderBy('title', 'desc')
+  );
 
 getDocs(colRef)
   .then(snapshot => {
