@@ -2,7 +2,8 @@ import {initializeApp} from 'firebase/app'
 import {
   getFirestore,
   collection,
-  getDocs
+  getDocs,
+  addDoc
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -34,4 +35,16 @@ getDocs(colRef)
   }).catch(err => {
     console.log(err.message);
   })
+
+const addBookForm = document.querySelector('.add')
+addBookForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  addDoc(colRef, {
+    title: addBookForm.title.value,
+    author: addBookForm.author.value
+  }).then(_ => {
+    addBookForm.reset();
+  });
+});
 
