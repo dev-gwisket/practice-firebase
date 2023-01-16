@@ -1,6 +1,7 @@
 import {initializeApp} from 'firebase/app'
 import {
-  getFirestore
+  getFirestore,
+  collection
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -15,4 +16,5 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const db = getFirestore();
+const colRef = collection(db, 'books');
 
