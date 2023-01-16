@@ -1,0 +1,6 @@
+= Practice for Firebase 9
+
+This is my practices for firebase 9.
+I really appreciate to 'The Net Ninja' who taught me.
+If you are interested in building a website in firebase, please visit this link: https://www.youtube.com/playlist?list=PL4cUxeGkcC9jERUGvbudErNCeSZHWUVlb
+
