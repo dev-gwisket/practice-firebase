@@ -60,7 +60,7 @@ getDocs(colRef)
     console.log(err.message);
   })
 
-onSnapshot(q, snapshot => {
+const unsubCol = onSnapshot(q, snapshot => {
   let books = [];
 
   snapshot.docs.forEach(doc => {
@@ -104,7 +104,7 @@ getDoc(docRef)
     console.log(doc.data(), doc.id);
   });
 
-onSnapshot(docRef, doc => {
+const unsubDoc = onSnapshot(docRef, doc => {
   console.log(doc.data(), doc.id);
 });
 
@@ -162,7 +162,16 @@ loginForm.addEventListener('submit', e => {
     });
 });
 
-onAuthStateChanged(auth, user => {
+const unsubAuth = onAuthStateChanged(auth, user => {
   console.log('user status has been changed:', user);
+});
+
+const unsubButton = document.querySelector('.unsub');
+unsubButton.addEventListener('click', _ => {
+  console.log('unsubscribing');
+
+  unsubCol();
+  unsubDoc();
+  unsubAuth();
 });
 
