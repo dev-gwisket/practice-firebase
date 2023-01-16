@@ -9,7 +9,8 @@ import {
   onSnapshot,
   query,
   where,
-  orderBy
+  orderBy,
+  serverTimestamp
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -28,8 +29,7 @@ const colRef = collection(db, 'books');
 const q =
   query(
     colRef,
-    where('author', '==', 'Dennis Ritchie'),
-    orderBy('title', 'desc')
+    orderBy('createdAt')
   );
 
 getDocs(colRef)
@@ -54,7 +54,7 @@ onSnapshot(q, snapshot => {
   snapshot.docs.forEach(doc => {
     books.push({
       ...doc.data(),
-      id: doc.id
+      id: doc.id,
     });
   });
 
@@ -67,7 +67,8 @@ addBookForm.addEventListener('submit', e => {
 
   addDoc(colRef, {
     title: addBookForm.title.value,
-    author: addBookForm.author.value
+    author: addBookForm.author.value,
+    createdAt: serverTimestamp()
   }).then(_ => {
     addBookForm.reset();
   });
