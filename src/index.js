@@ -5,7 +5,8 @@ import {
   getDocs,
   addDoc,
   deleteDoc,
-  doc
+  doc,
+  onSnapshot
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -37,6 +38,19 @@ getDocs(colRef)
   }).catch(err => {
     console.log(err.message);
   })
+
+onSnapshot(colRef, snapshot => {
+  let books = [];
+
+  snapshot.docs.forEach(doc => {
+    books.push({
+      ...doc.data(),
+      id: doc.id
+    });
+  });
+
+  console.log(books);
+});
 
 const addBookForm = document.querySelector('.add')
 addBookForm.addEventListener('submit', e => {
